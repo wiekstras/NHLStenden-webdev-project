@@ -6,4 +6,18 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\assets\stripboek.jpeg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models" />
+      <Folder Include="Repositories" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.0.123" />
+      <PackageReference Include="MySqlConnector" Version="2.1.8" />
+    </ItemGroup>
+
 </Project>
