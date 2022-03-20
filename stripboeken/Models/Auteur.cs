@@ -2,18 +2,13 @@ namespace stripboeken.Models;
 
 public class Auteur
 {
-    public int auteurId { get; set; }
+    public int AuteurId { get; set; }
     
-    public string voornaam { get; set; }
+    public string Voornaam { get; set; }
     
-    public string achternaam { get; set; }
+    public string Achternaam { get; set; }
     
-    public string weblink { get; set; }
+    public string Weblink { get; set; }
 
-    public enum functie
-    {
-        Schrijver,
-        Illustrator,
-        Beide,
-    }
+    public string Functie { get; set; } 
 }

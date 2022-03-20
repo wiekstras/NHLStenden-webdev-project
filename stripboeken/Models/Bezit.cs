@@ -2,28 +2,21 @@ namespace stripboeken.Models;
 
 public class Bezit
 {
-    public int waardering { get; set; }
+    public int Waardering { get; set; }
 
-    public enum staat
-    {
-        OnBekend,
-        Gebruikt,
-        AlsNieuw,
-        Nieuw,
-    }
-
-    public string staatBeschrijving { get; set; }
+    public string Staat { get; set; }
+    public string StaatBeschrijving { get; set; }
     
-    public decimal inkoopPrijs  { get; set; }
+    public decimal InkoopPrijs  { get; set; }
     
-    public int isTeKoop { get; set; }
+    public int IsTeKoop { get; set; }
     
-    public decimal verkoopPrijs { get; set; }
+    public decimal VerkoopPrijs { get; set; }
     
-    public string afbeeldingsPad { get; set; }
+    public string AfbeeldingsPad { get; set; }
     
-    public int gebruikerId { get; set; }
+    public int GebruikerId { get; set; }
     
-    public int uitgaveId { get; set; }
+    public int UitgaveId { get; set; }
     
 }

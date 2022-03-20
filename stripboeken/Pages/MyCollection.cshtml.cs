@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using stripboeken.Models;
+using stripboeken.Repositories;
 
 namespace stripboeken.Pages;
 

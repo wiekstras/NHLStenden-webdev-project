@@ -2,10 +2,10 @@ namespace stripboeken.Models;
 
 public class Reeks
 {
-    public int reeksId { get; set; }
+    public int ReeksId { get; set; }
     
-    public string titel { get; set; }
+    public string Titel { get; set; }
     
-    public int aantalBoeken { get; set; }
+    public int AantalBoeken { get; set; }
     
 }

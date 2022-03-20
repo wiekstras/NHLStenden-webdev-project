@@ -2,7 +2,10 @@ namespace stripboeken.Models;
 
 public class Schrijft
 {
-    public int auteurId { get; set; }
+    public int AuteurId { get; set; }
     
-    public int uitgaveId { get; set; }
+    public int UitgaveId { get; set; }
+
+    public Auteur Auteur { get; set; }  
+    public Uitgave Uitgave { get; set; }
 }

@@ -2,24 +2,20 @@ namespace stripboeken.Models;
 
 public class Gebruiker
 {
-    public int gebruikersId { get; set; }
+    public int GebruikersId { get; set; }
 
-    public enum rol
-    {
-        Standaard,
-        Beheerder
-    }
+    public string Rol { get; set; }
     
-    public string email { get; set; }
+    public string Email { get; set; }
     
-    public string gebruikersNaam { get; set; }
+    public string GebruikersNaam { get; set; }
     
-    public string volledigeNaam { get; set; }
+    public string VolledigeNaam { get; set; }
     
-    public int is18plus { get; set; }
+    public int Is18plus { get; set; }
 
-    public string wachtwoord { get; set; }
+    public string Wachtwoord { get; set; }
 
-    public string salt { get; set; }
+    public string Salt { get; set; }
     
 }

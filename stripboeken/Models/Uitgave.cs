@@ -2,38 +2,34 @@ namespace stripboeken.Models;
 
 public class Uitgave
 {
-    public int uitgaveId { get; set; }
+    public int UitgaveId { get; set; }
     
     public string ISBN { get; set; }
     
-    public int jaar { get; set; }
+    public int Jaar { get; set; }
     
-    public string uitgever { get; set; }
+    public string Uitgever { get; set; }
     
-    public string druk { get; set; }
+    public string Druk { get; set; }
     
-    public string taal { get; set; }
+    public string Taal { get; set; }
 
-    public enum cover
-    {
-        Onbekend ,
-        Hardcover,
-        Softcover,
-        Digitaal,
-    }
+    public string Cover { get; set; }
     
-    public int aantalBladzijden { get; set; }
+    public int AantalBladzijden { get; set; }
     
-    public decimal breedte { get; set; }
+    public decimal Breedte { get; set; }
     
-    public decimal hoogte { get; set; }
+    public decimal Hoogte { get; set; }
 
-    public string afbeeldingspad { get; set; }
+    public string AfbeeldingsPad { get; set; }
     
-    public string weetjes { get; set; }
+    public string Weetjes { get; set; }
     
-    public string beschrijving { get; set; }
+    public string Beschrijving { get; set; }
     
-    public int boekId { get; set; }
+    public int BoekId { get; set; }
+
+    public Boek Boek { get; set; }  
 
 }

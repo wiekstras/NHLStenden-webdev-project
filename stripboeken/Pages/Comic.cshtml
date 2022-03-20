@@ -1,24 +1,33 @@
 @page
+@using stripboeken.Models
 @model stripboeken.Pages.Comic
-<div>
-<div>
-    <h1>Donald duck</h1>
-    <p>Reeks 1 Boek 1</p>
-</div>
+<div class="container">
+    <div class="row mt-2">
+        <h1>@Model.Boek.Titel</h1>
+        <p>Reeks: @Model.Reeks.Titel</p>
+    </div>
     <div>
         <div class="row">
             <div class="col">
                 <div class="" style="width: 19rem;">
-                    <img class="" src="~/assets/stripboek.jpeg" alt="card d image cap">
+                    <img class="" src="@Model.Uitgave.AfbeeldingsPad" alt="card d image cap">
                 </div>
             </div>
             <div class="col">
                 <div>
                     <p>
-                        Beschrijving:
-                        
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        <b>Beschrijving:</b> <br />
+
+                        @Model.Uitgave.Beschrijving
                     </p>
+                    @if (@Model.Uitgave.Weetjes != null)
+                    {
+                        <p>
+                            <b>Weetjes:</b> <br />
+
+                            @Model.Uitgave.Weetjes
+                        </p>
+                    }
                 </div>
                 <div class="align-content-center">
                     <button type="button" class="btn btn-secondary btn-lg">Voeg toe aan collectie</button>
@@ -32,36 +41,38 @@
                         <b>Stripboek informatie:</b>
                     </h2>
                     <pre>
-    Auteur: abc
-    Illustrator: abc
-    ISBN: abc
-    Aantalblz: 20
-    Dikte:
-    Hoogte:
-    Gewicht:
+
+    Auteur: @foreach (Auteur schrijver in @Model.Auteurs) { @if (@schrijver.Functie != "Illustrator") {<a href="@schrijver.Weblink">@schrijver.Voornaam @schrijver.Achternaam</a>}}
+
+    Illustrator: @foreach (Auteur illustrator in @Model.Auteurs) { @if (@illustrator.Functie != "Schrijver") {<a href="@illustrator.Weblink">@illustrator.Voornaam @illustrator.Achternaam</a>}}
+
+    ISBN: @Model.Uitgave.ISBN
+    Jaar: @Model.Uitgave.Jaar
+    Uitgever: @Model.Uitgave.Uitgever
+    Druk: @Model.Uitgave.Druk
+    Cover: @Model.Uitgave.Cover
+    Taal: @Model.Uitgave.Taal
+    Aantalblz: @Model.Uitgave.AantalBladzijden
+    Afmetingen: @Model.Uitgave.Hoogte x @Model.Uitgave.Breedte cm
                     </pre>
                 </div>
             </div>
             <div class="col">
                 <div class="row">
-                    <div class="card mb-2" style="width: 9rem;">
-                        <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-title">Suske en wiske</p>
+                    <h5>
+                        <b> Meer van deze reeks: </b>
+                    </h5>
+                    @foreach (Uitgave uitgave in @Model.Uitgaves)
+                    {
+                        <div class="card mb-2" style="width: 9rem;">
+                            <img class="card-img-top" src="@uitgave.AfbeeldingsPad" alt="Card image cap">
+                            <div class="card-body">
+                                <h10 class="card-title">@uitgave.Boek.Titel</h10>
+                                <p class="card-text"><b>@uitgave.Jaar</b></p>
+                                <a asp-page="/Comic" asp-route-uitgaveid="@uitgave.UitgaveId" class="stretched-link"></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card mb-2" style="width: 9rem;">
-                        <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-title">Suske en wiske</p>
-                        </div>
-                    </div>
-                    <div class="card mb-2" style="width: 9rem;">
-                        <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-title">Suske en wiske</p>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
