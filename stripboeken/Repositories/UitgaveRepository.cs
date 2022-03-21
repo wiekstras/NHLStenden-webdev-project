@@ -47,14 +47,14 @@ public class UitgaveRepository
 
     }
 
-    public Uitgave Get(int uitgaveId)
+    public DetailUitgave Get(int uitgaveId)
     {
         string sql = @"select *
-                from uitgave
+                from detailuitgave
                 where uitgaveId = @uitgaveId";
 
         using var connection = GetConnection();
-        var uitgave = connection.QuerySingle<Uitgave>(sql, new {uitgaveId});
+        var uitgave = connection.QuerySingle<DetailUitgave>(sql, new {uitgaveId});
         return uitgave;
     }
 

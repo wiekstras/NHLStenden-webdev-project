@@ -9,7 +9,7 @@ public class Comic : PageModel
 {
     [BindProperty(SupportsGet = true)]
     public int UitgaveId { get; set; }
-    public Uitgave Uitgave
+    public DetailUitgave Uitgave
     {
         get
         {
@@ -17,27 +17,11 @@ public class Comic : PageModel
         }
     }
 
-    public Boek Boek
-    {
-        get
-        {
-            return new BoekRepository().Get(Uitgave.BoekId);
-        }
-    }
-
-    public Reeks Reeks
-    {
-        get
-        {
-            return new ReeksRepository().Get(Boek.ReeksId);
-        }
-    }
-
     public IEnumerable<Uitgave> Uitgaves
     {
         get
         {
-            return new UitgaveRepository().GetThree(UitgaveId, Boek.ReeksId);
+            return new UitgaveRepository().GetThree(UitgaveId, Uitgave.ReeksId);
         }
     }
 
