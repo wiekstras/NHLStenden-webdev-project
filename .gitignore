@@ -5,3 +5,4 @@ riderModule.iml
 /_ReSharper.Caches/
 stripboeken/appsettings.json
 stripboeken/DbUtils.cs
+stripboeken/Pages/MyCollection.cshtml.cs
