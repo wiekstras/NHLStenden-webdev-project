@@ -16,5 +16,6 @@ public class PrivacyModel : PageModel
 
     public void OnGet()
     {
+        var users = User;
     }
 }

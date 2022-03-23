@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace stripboeken.Models;
 
 public class Gebruiker
@@ -6,16 +8,20 @@ public class Gebruiker
 
     public string Rol { get; set; }
     
-    public string Email { get; set; }
+  
+    public string gebruikersNaam { get; set; }
+
+   
+    public string voledigeNaam { get; set; }
+
+    public string email { get; set; }
     
-    public string GebruikersNaam { get; set; }
+    public string is18plus { get; set; }
     
-    public string VolledigeNaam { get; set; }
+    public string wachtwoord { get; set; }
+    
     
     public int Is18plus { get; set; }
 
-    public string Wachtwoord { get; set; }
-
-    public string Salt { get; set; }
     
 }

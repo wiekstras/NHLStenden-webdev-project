@@ -1,0 +1,29 @@
+@page
+@model stripboeken.Pages.Logout
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <form method="POST">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <p>Wil je echt uitloggen?</p>
+                    <div>
+                        <button class="btn btn-light" asp-page-handler="Logout">Ja</button>
+                        <button class="btn btn-light" asp-page-handler="DontLogout">Nee</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

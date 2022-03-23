@@ -8,7 +8,7 @@ namespace stripboeken
     {
         public IDbConnection GetDbConnection()
         {
-            string connectionString = "Server=127.0.0.1;Port=3306;Database=comicstore;Uid=root;Pwd=;";
+            string connectionString = "Server=127.0.0.1;Port=8889;Database=comicstore;Uid=root;Pwd=root;";
             return new MySqlConnection(connectionString);
         }
     }

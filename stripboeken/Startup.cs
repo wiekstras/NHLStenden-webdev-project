@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace stripboeken
 {
@@ -27,6 +24,17 @@ namespace stripboeken
             {
                 //options.ConstraintMap.Add("categoryConstraint", typeof(CategoryConstraint));
             });
+            services.AddDbContext<AuthDbUtils>(options =>
+            {
+                var connetionString = Configuration.GetConnectionString("ConnectionString");
+                options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString));
+            });
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AuthDbUtils>();
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +57,8 @@ namespace stripboeken
             app.UseRouting();
             app.UseSession();
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

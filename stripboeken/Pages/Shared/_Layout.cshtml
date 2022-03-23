@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,17 +21,37 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/MyCollection">Mijn collectie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Comic/{id:int}">Product pagina</a>
-                        </li>
-                    </ul>
+                    @{
+                        if (SignInManager.IsSignedIn(User))
+                        {
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/MyCollection">Mijn collectie</a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav d-flex justify-content-end">
+                                <li class="nav-item">
+                                                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogOut">Log uit</a>
+                                                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav d-flex justify-content-end flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Register">Registreer</a>
+                                </li>
+                            </ul>
+                        }
+                    }
+                    
+                   
                 </div>
             </div>
         </nav>
