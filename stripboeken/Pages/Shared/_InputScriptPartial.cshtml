@@ -1,0 +1,26 @@
+﻿<script>
+    function nieuweReeks()
+    {
+        if($('#nieuweReeksInvoer').is(":checked")) {
+            $("#nieuweReeksTitel").show();
+            $("#bestaandeReeksTitel").hide();
+        }
+        else {
+            $("#nieuweReeksTitel").hide();
+            $("#bestaandeReeksTitel").show();
+        }
+    }
+
+    function nieuwBoek()
+    {
+        if($('#nieuwBoekInvoer').is(":checked")) {
+            $("#nieuweBoekTitel").show();
+            $("#bestaandeBoekTitel").hide();
+        }
+        else {
+            $("#nieuweBoekTitel").hide();
+            $("#bestaandeBoekTitel").show();
+        }
+    }
+
+</script>

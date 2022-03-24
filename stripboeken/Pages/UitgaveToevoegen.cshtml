@@ -1,19 +1,169 @@
 ﻿@page
+@using stripboeken.Models
 @model stripboeken.Pages.UitgaveToevoegen
 
-@{
-    Layout = null;
-}
+<div class="container">
+    <div class="row mt-2">
+        <h1>Nieuwe Uitgave</h1>
+        <div class="col col-6">
+            @if (@Model.Reeks == null)
+            {
+                <form asp-page-handler="reeks" method="post">
+                    @* Toevoegen van een reeks: *@
+                    <div class="form-group" id="nieuweReeksTitel" style="display:none">
+                        <label asp-for="Reeks.Titel">Reeks titel:</label>
+                        <input asp-for="Reeks.Titel" class="form-control">
+                        <span class="text-danger" asp-validation-for="Reeks.Titel"></span>
+                    </div>
+                    <div class="form-group" id="bestaandeReeksTitel">
+                        <label asp-for="Reeks.ReeksId">Reeks titel:</label>
+                        <select class="form-select"
+                            asp-for="Reeks.ReeksId"
+                            asp-items="Model.Reeksen.Select(x => new SelectListItem() {
+                            Text = x.Titel,
+                            Value = x.ReeksId.ToString()})">
+                        </select>
+                        <span class="text-danger" asp-validation-for="Reeks.ReeksId"></span>
+                    </div>
+                    <div class="form-check">
+                        <input id="nieuweReeksInvoer" type="checkbox" class="form-check-input" onchange="nieuweReeks();">
+                        <label class="form-check-label" for="exampleCheck1">Nieuwe reeks?</label>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Toevoegen</button>
+                </form>
+            }
 
-<!DOCTYPE html>
+            @if (Model.Reeks != null)
+            {
+                <form asp-page-handler="uitgave" id="uitgave" method="post">
+                    <h5>Reeks: @Model.Reeks.Titel</h5>
+                    @* Toevoegen van een boek: *@
+                    @if (Model.Boeken != null)
+                    {
+                        <div class="form-group" id="nieuweBoekTitel" style="display:none">
+                            <label asp-for="Boek.Titel">Stripboek titel:</label>
+                            <input asp-for="Boek.Titel" class="form-control">
+                            <span class="text-danger" asp-validation-for="Boek.Titel"></span>
+                        </div>
+                        <div class="form-group" id="bestaandeBoekTitel">
+                            <label asp-for="Boek.BoekId">Stripboek titel:</label>
+                            <select class="form-select"
+                            asp-for="Boek.BoekId"
+                            asp-items="Model.Boeken.Select(x => new SelectListItem() {
+                            Text = x.Titel,
+                            Value = x.BoekId.ToString()})">
+                            </select>
+                            <span class="text-danger" asp-validation-for="Reeks.ReeksId"></span>
+                        </div>
+                        <div class="form-check">
+                            <input id="nieuwBoekInvoer" type="checkbox" class="form-check-input" onchange="nieuwBoek();">
+                            <label class="form-check-label" for="exampleCheck1">Nieuw boek?</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group" id="nieuweBoekTitel">
+                            <label asp-for="Boek.Titel">Stripboek titel:</label>
+                            <input asp-for="Boek.Titel" class="form-control">
+                            <span class="text-danger" asp-validation-for="Boek.Titel"></span>
+                        </div>
+                    }
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+                    @*Toevoegen van auteurs:*@
+                    <p>Auteurs:</p>
+                    <div class="form-group">
+                        <label asp-for="Auteur.Voornaam">Voornaam:</label>
+                        <input asp-for="Auteur.Voornaam" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Auteur.Achternaam">Achternaam:</label>
+                        <input asp-for="Auteur.Achternaam" class="form-control">
+                    </div>
+
+                    @foreach (Auteur auteurs in @Model.Auteurs)
+                    {
+
+                    }
+
+                    @*Toevoegen van een uitgave:*@
+                    <div class="form-group">
+                        <label asp-for="Uitgave.ISBN">ISBN:</label>
+                        <input asp-for="Uitgave.ISBN" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Uitgave.ISBN"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Jaar">Jaar van uitgave:</label>
+                        <input asp-for="Uitgave.Jaar" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.Jaar"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Uitgever">Uitgeverij:</label>
+                        <input asp-for="Uitgave.Uitgever" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.Uitgever"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Druk">Druk:</label>
+                        <input asp-for="Uitgave.Druk" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.Druk"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Cover">Cover materiaal:</label>
+                        <select asp-for="Uitgave.Cover" class="form-select">
+                            <option value="Onbekend">Onbekend</option>
+                            <option value="Hardcover">Hardcover</option>
+                            <option value="Softcover">Softcover</option>
+                            <option value="Digitaal">Digitaal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Taal">Taal:</label>
+                        <input asp-for="Uitgave.Taal" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.Taal"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.AantalBladzijden">Aantal Bladzijden:</label>
+                        <input asp-for="Uitgave.AantalBladzijden" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.AantalBladzijden"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Hoogte">Hoogte in cm:</label>
+                        <input asp-for="Uitgave.Hoogte" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.Hoogte"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Breedte">Breedte in cm:</label>
+                        <input asp-for="Uitgave.Breedte" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.Breedte"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.AfbeeldingsPad">Afbeeldings URL:</label>
+                        <input asp-for="Uitgave.AfbeeldingsPad" class="form-control">
+                        <span class="text-danger" asp-validation-for="Uitgave.AfbeeldingsPad"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Beschrijving">Beschrijving:</label>
+                        <textarea class="form-control" asp-for="Uitgave.Beschrijving" rows="3"></textarea>
+                        <span class="text-danger" asp-validation-for="Uitgave.Beschrijving"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Uitgave.Weetjes">Weetjes:</label>
+                        <textarea class="form-control" asp-for="Uitgave.Weetjes" rows="3"></textarea>
+                        <span class="text-danger" asp-validation-for="Uitgave.Weetjes"></span>
+                    </div>
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-secondary">Toevoegen</button>
+                        <a class="btn btn-secondary" href="/Index" role="button">Annuleren</a>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
 </div>
-</body>
-</html>
+
+
+@section Scripts {
+  @{
+    await Html.RenderPartialAsync("_InputScriptPartial");
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

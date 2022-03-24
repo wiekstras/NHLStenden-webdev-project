@@ -15,7 +15,8 @@ public class UitgaveRepository
     {
         string sql = @"select u.*, b.boekId As Id, b.*
                 from uitgave u
-                inner join boek b on u.boekId = b.boekId";
+                inner join boek b on u.boekId = b.boekId
+                order by b.reeksId";
 
         using var connection = GetConnection();
 
@@ -56,6 +57,44 @@ public class UitgaveRepository
         using var connection = GetConnection();
         var uitgave = connection.QuerySingle<DetailUitgave>(sql, new {uitgaveId});
         return uitgave;
+    }
+
+    public Uitgave Add(Uitgave uitgave)
+    {
+        string sql = @"
+                INSERT INTO Uitgave(
+                    ISBN, 
+                    jaar, 
+                    uitgever, 
+                    druk, 
+                    cover, 
+                    taal, 
+                    aantalBladzijden, 
+                    hoogte, 
+                    breedte,
+                    afbeeldingsPad,
+                    beschrijving,
+                    weetjes,
+                    boekId) 
+                VALUES (
+                    @ISBN,
+                    @Jaar,
+                    @Uitgever,
+                    @Druk,
+                    @Cover,
+                    @Taal,
+                    @AantalBladzijden,
+                    @Hoogte,
+                    @Breedte,
+                    @AfbeeldingsPad,
+                    @Beschrijving,
+                    @Weetjes,
+                    @BoekId); 
+                SELECT * FROM Uitgave WHERE UitgaveId = LAST_INSERT_ID()";
+
+        using var connection = GetConnection();
+        var addedUitgave = connection.QuerySingle<Uitgave>(sql, uitgave);
+        return addedUitgave;
     }
 
 }
