@@ -1,23 +1,28 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using stripboeken.Models;
 using stripboeken.Repositories;
 
 namespace stripboeken.Pages;
 
-[Authorize]
-public class PrivacyModel : PageModel
+public class MyCollection : PageModel
 {
-    private readonly ILogger<PrivacyModel> _logger;
+    private readonly UserManager<IdentityUser> userManager;
 
-    public PrivacyModel(ILogger<PrivacyModel> logger)
+    public MyCollection(UserManager<IdentityUser> userManager)
     {
-        _logger = logger;
+        this.userManager = userManager;
     }
-
+    public IEnumerable<Bezit> Bezit
+    {
+        //De lijst van producten wordt via een query opgehaald als deze onder de juiste category vallen.
+        get
+        {
+            return new BezitRepository().Get(userManager.GetUserId(User));
+        }
+    }
     public void OnGet()
     {
-        var users = User;
+        
     }
 }
