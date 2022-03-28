@@ -7,6 +7,6 @@ public class Schrijft
     public int UitgaveId { get; set; }
     public string Functie { get; set; }
 
-    public Auteur Auteur { get; set; }  
-    public Uitgave Uitgave { get; set; }
+    //public Auteur Auteur { get; set; }  
+    //public Uitgave Uitgave { get; set; }
 }

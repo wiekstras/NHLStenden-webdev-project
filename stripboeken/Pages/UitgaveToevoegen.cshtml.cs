@@ -24,7 +24,7 @@ namespace stripboeken.Pages
         public Schrijft Illustrator { get; set; }
 
         [BindProperty]
-        public Auteur NewAuteur { get; set; } 
+        public Auteur NewAuteur { get; set; }
 
         [BindProperty]
         public Auteur NewIllustrator { get; set; }
@@ -108,26 +108,61 @@ namespace stripboeken.Pages
 
             Uitgave = new UitgaveRepository().Add(Uitgave);
 
-            if (Auteur.AuteurId != 0)
+            if (NewAuteur.Voornaam == NewIllustrator.Voornaam)
             {
-                Auteur.Functie = "Auteur";
-                Illustrator.Functie = "Illustrator";
+                NewAuteur = new AuteurRepository().AddAuteur(NewAuteur);
 
+                Auteur.AuteurId = NewIllustrator.AuteurId;
                 Auteur.UitgaveId = Uitgave.UitgaveId;
-                Illustrator.UitgaveId = Uitgave.UitgaveId;
+                Auteur.Functie = "Beide";
+            }
 
-                if (Auteur.AuteurId == Illustrator.AuteurId)
+            else
+            {
+                if (NewAuteur.Voornaam != null)
                 {
-                    Auteur.Functie = "Beide";
-                    new AuteurRepository().Add(Auteur);
+                    NewAuteur = new AuteurRepository().AddAuteur(NewAuteur);
+
+                    Auteur.AuteurId = NewIllustrator.AuteurId;
+                    Auteur.UitgaveId = Uitgave.UitgaveId;
+                    Auteur.Functie = "Auteur";
                 }
-                else
+
+                if (NewIllustrator.Voornaam != null)
                 {
-                    new AuteurRepository().Add(Auteur);
+                    NewIllustrator = new AuteurRepository().AddAuteur(NewIllustrator);
+
+                    Illustrator.AuteurId = NewIllustrator.AuteurId;
+                    Illustrator.UitgaveId = Uitgave.UitgaveId;
+                    Illustrator.Functie = "Illustrator";
+
                     new AuteurRepository().Add(Illustrator);
+
                 }
             }
 
+            if (Auteur.AuteurId == Illustrator.AuteurId)
+            {
+                Auteur.UitgaveId = Uitgave.UitgaveId;
+                Auteur.Functie = "Beide";
+                new AuteurRepository().Add(Auteur);
+            }
+            else
+            {
+                if (Auteur.AuteurId != 0)
+                {
+                    Auteur.UitgaveId = Uitgave.UitgaveId;
+                    Auteur.Functie = "Auteur";
+                    new AuteurRepository().Add(Auteur);
+                }
+
+                if (Illustrator.AuteurId != 0)
+                {
+                    Illustrator.UitgaveId = Uitgave.UitgaveId;
+                    Illustrator.Functie = "Illustrator";
+                    new AuteurRepository().Add(Illustrator);
+                }
+            }
             return Redirect("/UitgaveToevoegen");
         }
     }

@@ -33,11 +33,11 @@ public class Comic : PageModel
         }
     }
     
-    public IEnumerable<Auteur> Auteurs
+    public IEnumerable<DetailAuteur> Auteurs
     {
         get
         {
-            return new AuteurRepository().Get(UitgaveId);
+            return new AuteurRepository().GetFromUitgave(UitgaveId);
         }
     }
 

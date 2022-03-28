@@ -55,4 +55,16 @@ public class AuteurRepository
         using var connection = GetConnection();
         var addedSchrijft = connection.Execute(sql, schrijft);
     }
+
+    public Auteur AddAuteur(Auteur auteur)
+    {
+        string sql = @"
+                INSERT INTO Boek (auteurId, voornaam, achternaam, weblink) 
+                VALUES (@auteurId, @voornaam, @achternaam, @weblink); 
+                SELECT * FROM Auteur WHERE AuteurId = LAST_INSERT_ID()";
+
+        using var connection = GetConnection();
+        var addedAuteur = connection.QuerySingle<Auteur>(sql, auteur);
+        return addedAuteur;
+    }
 }
