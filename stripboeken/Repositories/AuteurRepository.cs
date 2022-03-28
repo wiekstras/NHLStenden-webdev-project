@@ -27,15 +27,32 @@ public class AuteurRepository
     //    return auteur;
     //}
 
-    public IEnumerable<Auteur> Get(int uitgaveId)
+    public IEnumerable<DetailAuteur> GetFromUitgave(int uitgaveId)
     {
         using var connection = GetConnection();
-        var sql = @"SELECT a.* 
-                     FROM Auteur a 
-                     INNER JOIN Schrijft s ON a.auteurId = s.auteurId 
-                     INNER JOIN Uitgave u ON s.uitgaveId = u.uitgaveId 
-                     WHERE u.uitgaveId = @uitgaveId;";
-        var auteur = connection.Query<Auteur>(sql, new{uitgaveId});
+        var sql = @"SELECT * 
+                     FROM DetailAuteur
+                     WHERE uitgaveId = @uitgaveId;";
+        var auteur = connection.Query<DetailAuteur>(sql, new { uitgaveId });
         return auteur;
+    }
+
+    public IEnumerable<Auteur> Get()
+    {
+        using var connection = GetConnection();
+        var sql = @"SELECT * 
+                     FROM Auteur;";
+        var auteur = connection.Query<Auteur>(sql);
+        return auteur;
+    }
+
+    public void Add(Schrijft schrijft)
+    {
+        string sql = @"
+                INSERT INTO Schrijft (AuteurId, UitgaveId, Functie) 
+                VALUES (@AuteurId, @UitgaveId, @Functie); ";
+
+        using var connection = GetConnection();
+        var addedSchrijft = connection.Execute(sql, schrijft);
     }
 }

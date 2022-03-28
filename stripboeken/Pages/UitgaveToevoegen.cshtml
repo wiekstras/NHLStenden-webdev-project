@@ -4,12 +4,13 @@
 
 <div class="container">
     <div class="row mt-2">
-        <h1>Nieuwe Uitgave</h1>
-        <div class="col col-6">
+        <div class="col col-6 mx-auto">
+            <h1>Nieuwe Uitgave</h1>
             @if (@Model.Reeks == null)
             {
                 <form asp-page-handler="reeks" method="post">
                     @* Toevoegen van een reeks: *@
+                    <h5>Selecteer eerst de reeks:</h5>
                     <div class="form-group" id="nieuweReeksTitel" style="display:none">
                         <label asp-for="Reeks.Titel">Reeks titel:</label>
                         <input asp-for="Reeks.Titel" class="form-control">
@@ -33,57 +34,94 @@
                 </form>
             }
 
-            @if (Model.Reeks != null)
+            @* Toevoegen van een boek: *@
+            @if (Model.Boeken != null && Model.Reeks != null && !Model.ToggleMenu)
             {
-                <form asp-page-handler="uitgave" id="uitgave" method="post">
+                <form asp-page-handler="boek" id="boek" method="post">
                     <h5>Reeks: @Model.Reeks.Titel</h5>
-                    @* Toevoegen van een boek: *@
-                    @if (Model.Boeken != null)
-                    {
-                        <div class="form-group" id="nieuweBoekTitel" style="display:none">
-                            <label asp-for="Boek.Titel">Stripboek titel:</label>
-                            <input asp-for="Boek.Titel" class="form-control">
-                            <span class="text-danger" asp-validation-for="Boek.Titel"></span>
-                        </div>
-                        <div class="form-group" id="bestaandeBoekTitel">
-                            <label asp-for="Boek.BoekId">Stripboek titel:</label>
-                            <select class="form-select"
+                    <br>
+                    <h5>Selecteer een stripboek:</h5>
+                    <div class="form-group" id="nieuweBoekTitel" style="display:none">
+                        <label asp-for="Boek.Titel">Stripboek titel:</label>
+                        <input asp-for="Boek.Titel" class="form-control">
+                        <span class="text-danger" asp-validation-for="Boek.Titel"></span>
+                    </div>
+                    <div class="form-group" id="bestaandeBoekTitel">
+                        <label asp-for="Boek.BoekId">Stripboek titel:</label>
+                        <select class="form-select"
                             asp-for="Boek.BoekId"
                             asp-items="Model.Boeken.Select(x => new SelectListItem() {
                             Text = x.Titel,
                             Value = x.BoekId.ToString()})">
-                            </select>
-                            <span class="text-danger" asp-validation-for="Reeks.ReeksId"></span>
-                        </div>
-                        <div class="form-check">
-                            <input id="nieuwBoekInvoer" type="checkbox" class="form-check-input" onchange="nieuwBoek();">
-                            <label class="form-check-label" for="exampleCheck1">Nieuw boek?</label>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="form-group" id="nieuweBoekTitel">
-                            <label asp-for="Boek.Titel">Stripboek titel:</label>
-                            <input asp-for="Boek.Titel" class="form-control">
-                            <span class="text-danger" asp-validation-for="Boek.Titel"></span>
-                        </div>
-                    }
+                        </select>
+                        <span class="text-danger" asp-validation-for="Reeks.ReeksId"></span>
+                    </div>
+                    <div class="form-check">
+                        <input id="nieuwBoekInvoer" type="checkbox" class="form-check-input" onchange="nieuwBoek();">
+                        <label class="form-check-label" for="exampleCheck1">Nieuw boek?</label>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Toevoegen</button>
+                </form>
+            }
+
+            @* Toevoegen van een uitgave: *@
+            @if (Model.ToggleMenu && @Model.Boek != null)
+            {
+                <form asp-page-handler="uitgave" id="uitgave" method="post">
+                    <h5>Boek: @Model.Boek.Titel</h5>
+                    <br>
+                    <h5>Vul een nieuwe uitgave in:</h5>
 
                     @*Toevoegen van auteurs:*@
-                    <p>Auteurs:</p>
-                    <div class="form-group">
-                        <label asp-for="Auteur.Voornaam">Voornaam:</label>
-                        <input asp-for="Auteur.Voornaam" class="form-control">
+                    <div class="form-group" id="nieuweAuteurVoornaam" style="display:none">
+                        <label asp-for="NewAuteur.Voornaam">Auteur voornaam:</label>
+                        <input asp-for="NewAuteur.Voornaam" class="form-control">
+                        <span class="text-danger" asp-validation-for="NewAuteur.Voornaam"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Auteur.Achternaam">Achternaam:</label>
-                        <input asp-for="Auteur.Achternaam" class="form-control">
+                    <div class="form-group" id="nieuweAuteurAchternaam" style="display:none">
+                        <label asp-for="NewAuteur.Achternaam">Auteur achternaam:</label>
+                        <input asp-for="NewAuteur.Achternaam" class="form-control">
+                        <span class="text-danger" asp-validation-for="NewAuteur.Achternaam"></span>
+                    </div>
+                    <div class="form-group" id="bestaandeAuteur">
+                        <label asp-for="Auteur">Auteur:</label>
+                        <select class="form-select"
+                            asp-for="Auteur.AuteurId"
+                            asp-items="Model.ListAuteurs.Select(x => new SelectListItem() {
+                            Text = x.Achternaam,
+                            Value = x.AuteurId.ToString()})">
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input id="nieuweAuteurInvoer" type="checkbox" class="form-check-input" onchange="nieuweAuteur();">
+                        <label class="form-check-label" for="exampleCheck1">Nieuwe auteur?</label>
+                    </div>
+                    <div class="form-group" id="nieuweIllustratorVoornaam" style="display:none">
+                        <label asp-for="NewIllustrator.Voornaam">Illustrator voornaam:</label>
+                        <input asp-for="NewIllustrator.Voornaam" class="form-control">
+                        <span class="text-danger" asp-validation-for="NewIllustrator.Voornaam"></span>
+                    </div>
+                    <div class="form-group" id="nieuweIllustratorAchternaam" style="display:none">
+                        <label asp-for="NewIllustrator.Achternaam">Illustrator achternaam:</label>
+                        <input asp-for="NewIllustrator.Achternaam" class="form-control">
+                        <span class="text-danger" asp-validation-for="NewIllustrator.Achternaam"></span>
+                    </div>
+                    <div class="form-group" id="bestaandeIllustrator">
+                        <label asp-for="Illustrator">Illustrator:</label>
+                        <select class="form-select"
+                            asp-for="Illustrator.AuteurId"
+                            asp-items="Model.ListAuteurs.Select(x => new SelectListItem() {
+                            Text = x.Achternaam,
+                            Value = x.AuteurId.ToString()})">
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input id="nieuweIllustratorInvoer" type="checkbox" class="form-check-input" onchange="nieuweIllustrator();">
+                        <label class="form-check-label" for="exampleCheck1">Nieuwe illustrator?</label>
                     </div>
 
-                    @foreach (Auteur auteurs in @Model.Auteurs)
-                    {
-
-                    }
 
                     @*Toevoegen van een uitgave:*@
                     <div class="form-group">

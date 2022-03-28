@@ -11,7 +11,7 @@ public class ReeksRepository
         return new DbUtils().GetDbConnection();
     }
 
-    public Reeks Get(int reeksId)
+    public Reeks GetSingle(int reeksId)
     {
         string sql = @"select *
                 from Reeks

@@ -23,4 +23,32 @@
         }
     }
 
+        function nieuweAuteur()
+    {
+        if($('#nieuweAuteurInvoer').is(":checked")) {
+            $("#nieuweAuteurVoornaam").show();
+            $("#nieuweAuteurAchternaam").show();
+            $("#bestaandeAuteur").hide();
+        }
+        else {
+            $("#nieuweAuteurVoornaam").hide();
+            $("#nieuweAuteurAchternaam").hide();
+            $("#bestaandeAuteur").show();
+        }
+    }
+
+        function nieuweIllustrator()
+    {
+        if($('#nieuweIllustratorInvoer').is(":checked")) {
+            $("#nieuweIllustratorVoornaam").show();
+            $("#nieuweIllustratorAchternaam").show();
+            $("#bestaandeIllustrator").hide();
+        }
+        else {
+            $("#nieuweIllustratorVoornaam").hide();
+            $("#nieuweIllustratorAchternaam").hide();
+            $("#bestaandeIllustrator").show();
+        }
+    }
+
 </script>

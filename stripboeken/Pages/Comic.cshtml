@@ -62,9 +62,9 @@
                     </h2>
                     <pre>
 
-    Auteur: @foreach (Auteur schrijver in @Model.Auteurs) { @if (@schrijver.Functie != "Illustrator") {<a href="@schrijver.Weblink">@schrijver.Voornaam @schrijver.Achternaam</a>}}
+    Auteur: @foreach (DetailAuteur schrijver in @Model.Auteurs) { @if (@schrijver.Functie != "Illustrator") {<a href="@schrijver.Weblink">@schrijver.Voornaam @schrijver.Achternaam</a>}}
 
-    Illustrator: @foreach (Auteur illustrator in @Model.Auteurs) { @if (@illustrator.Functie != "Schrijver") {<a href="@illustrator.Weblink">@illustrator.Voornaam @illustrator.Achternaam</a>}}
+    Illustrator: @foreach (DetailAuteur illustrator in @Model.Auteurs) { @if (@illustrator.Functie != "Schrijver") {<a href="@illustrator.Weblink">@illustrator.Voornaam @illustrator.Achternaam</a>}}
 
     ISBN: @Model.Uitgave.ISBN
     Jaar: @Model.Uitgave.Jaar

@@ -1,0 +1,101 @@
+﻿@page
+@model stripboeken.Pages.TestModel
+@{
+}
+
+<form class="form-horizontal" method="post">
+    <table class="table table-striped">
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Functie</th>
+            </tr>
+        @for (var i = 0; i < 5; i++)
+        {
+            <tr>
+                <td>
+                    <input type="text" name="[@i].Voornaam" />
+                </td>
+                <td>
+                    <input type="text" name="[@i].Achternaam" />
+                </td>
+                <td>
+                    <select asp-for="[@i].Functie">
+                        <option></option>
+                        <option value="Beide">Beide</option>
+                        <option value="Auteur">Auteur</option>
+                        <option value="Illustrator">Illustrator</option>
+                    </select>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>
+
+@*
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Voornaam</th>
+                                <th scope="col">Achternaam</th>
+                                <th scope="col">Functie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < 4; i++)
+                            {
+                                <tr>
+                                    <td><input asp-for="Auteur.Voornaam" /> </td>
+                                    <td><input asp-for="Auteur.Achternaam" /></td>
+                                    <td>
+                                        <select asp-for="Auteur.Functie" class="form-select">
+                                            <option></option>
+                                            <option value="Beide">Beide</option>
+                                            <option value="Auteur">Auteur</option>
+                                            <option value="Illustrator">Illustrator</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    *@
+
+                    @*
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Naam</th>
+                                <th scope="col">Functie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < 4; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <select asp-for="DetailAuteur[@i].AuteurId" class="form-select">
+                                            <option></option>
+                                            @foreach(DetailAuteur auteur in @Model.ListAuteurs){
+                                                <option name="DetailAuteur[@i].AuteurId" value="@auteur.AuteurId">@auteur.Voornaam @auteur.Achternaam </option> 
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select asp-for="DetailAuteur[@i].Functie" class="form-select">
+                                            <option></option>
+                                            <option name="DetailAuteur[@i].Functie" value="Beide">Beide</option>
+                                            <option name="DetailAuteur[@i].Functie" value="Auteur">Auteur</option>
+                                            <option name="DetailAuteur[@i].Functie" value="Illustrator">Illustrator</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    *@
