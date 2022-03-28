@@ -69,15 +69,31 @@ public class UitgaveRepository
         var uitgave = connection.QuerySingle<DetailUitgave>(sql, new {uitgaveId});
         return uitgave;
     }
-    public DetailUitgave Update(int uitgaveId)
+    public void Update(Uitgave uitgaveInfo, Boek boekInfo)
     {
-        string sql = @"select *
-                from detailuitgave
-                where uitgaveId = @uitgaveId";
+        string sqluitgave = @"UPDATE `uitgave` SET 
+                    ISBN = @ISBN, 
+                    afbeeldingsPad = @afbeeldingsPad, 
+                    jaar = @jaar, 
+                    uitgever = @uitgever,
+                    druk = @druk,
+                    cover = @cover,
+                    taal = @taal,
+                    aantalBladzijden = @aantalBladzijden,
+                    breedte = @breedte,
+                    hoogte = @hoogte,
+                    beschrijving = @beschrijving,
+                    weetjes = @weetjes 
+                    WHERE uitgaveId = @uitgaveId";
+        
+        string sqlboek = @"UPDATE `boek` SET
+                    titel = @titel,
+                    weblink = @weblink
+                    WHERE boekId = @boekId";    
 
         using var connection = GetConnection();
-        var uitgave = connection.QuerySingle<DetailUitgave>(sql, new {uitgaveId});
-        return uitgave;
+        var uitgave = connection.Query<Uitgave>(sqluitgave,  uitgaveInfo);
+        var uitgave2 = connection.Query<Boek>(sqlboek, boekInfo);
     }
     public Uitgave Add(Uitgave uitgave)
     {
