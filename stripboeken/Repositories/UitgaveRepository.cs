@@ -47,6 +47,17 @@ public class UitgaveRepository
         return uitgaves;
 
     }
+    public Uitgave GetOne(int uitgaveId)
+    {
+        string sql = @"select *
+                from uitgave
+                where uitgaveId = @uitgaveId";
+
+        using var connection = GetConnection();
+        var uitgave = connection.QuerySingle<Uitgave>(sql, new {uitgaveId});
+        return uitgave;
+    }
+
 
     public DetailUitgave Get(int uitgaveId)
     {
@@ -58,7 +69,16 @@ public class UitgaveRepository
         var uitgave = connection.QuerySingle<DetailUitgave>(sql, new {uitgaveId});
         return uitgave;
     }
+    public DetailUitgave Update(int uitgaveId)
+    {
+        string sql = @"select *
+                from detailuitgave
+                where uitgaveId = @uitgaveId";
 
+        using var connection = GetConnection();
+        var uitgave = connection.QuerySingle<DetailUitgave>(sql, new {uitgaveId});
+        return uitgave;
+    }
     public Uitgave Add(Uitgave uitgave)
     {
         string sql = @"

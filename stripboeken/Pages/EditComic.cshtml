@@ -1,0 +1,115 @@
+@page
+@using stripboeken.Models
+@model stripboeken.Pages.EditComic
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+      <div class="container mt-5">
+          <div class="row justify-content-center align-items-center">
+              <div class="col-sm-12 col-md-12 col-lg-4">
+                  <h1 class="mb-3">Bewerk Comic</h1>
+                  <form method="POST">
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.BoekTitel" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.BoekTitel" value="@Model.DetailUitgaveInfo.BoekTitel" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.BoekTitel" class="text-danger"></span>
+
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Weblink" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Weblink" value="@Model.DetailUitgaveInfo.Weblink" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Weblink" class="text-danger"></span>
+
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.ISBN" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.ISBN" value="@Model.DetailUitgaveInfo.ISBN" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.ISBN" class="text-danger"></span>
+                                                                  
+                      </div>
+                      
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.AfbeeldingsPad" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.AfbeeldingsPad" value="@Model.DetailUitgaveInfo.AfbeeldingsPad" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.AfbeeldingsPad" class="text-danger"></span>
+                      
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Jaar" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Jaar" value="@Model.DetailUitgaveInfo.Jaar" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Jaar" class="text-danger"></span>
+                                            
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Uitgever" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Uitgever" value="@Model.DetailUitgaveInfo.Uitgever" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Uitgever" class="text-danger"></span>
+                                            
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Druk" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Druk" value="@Model.DetailUitgaveInfo.Druk" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Druk" class="text-danger"></span>
+                                                                  
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Cover" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Cover" value="@Model.DetailUitgaveInfo.Cover" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Cover" class="text-danger"></span>
+                                                                                        
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Taal" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Taal" value="@Model.DetailUitgaveInfo.Taal" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Taal" class="text-danger"></span>
+
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.AantalBladzijden" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.AantalBladzijden" value="@Model.DetailUitgaveInfo.AantalBladzijden" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.AantalBladzijden" class="text-danger"></span>
+
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Breedte" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Breedte" value="@Model.DetailUitgaveInfo.Breedte" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Breedte" class="text-danger"></span>
+
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Hoogte" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Hoogte" value="@Model.DetailUitgaveInfo.Hoogte" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Hoogte" class="text-danger"></span>
+
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Beschrijving" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Beschrijving" value="@Model.DetailUitgaveInfo.Beschrijving" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Beschrijving" class="text-danger"></span>
+                      
+                      </div>
+                      <div class="mb-3">
+                          <label asp-for="DetailUitgave.Weetjes" class="form-label"></label>
+                          <input type="text" asp-for="DetailUitgave.Weetjes" value="@Model.DetailUitgaveInfo.Weetjes" class="form-control"/>
+                          <span asp-validation-for="DetailUitgave.Weetjes" class="text-danger"></span>
+                      
+                      </div>
+                      
+                      <div class="mb-3">
+                          <button type="submit" class="btn btn btn-dark">Update uitgave</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+</div>
+</body>
+</html>

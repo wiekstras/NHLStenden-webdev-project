@@ -5,9 +5,13 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-@{
-    ViewData["Title"] = "Mijn collectie";
-}
+
+<style>
+    .card .delete {
+       z-index: 2;
+       position: relative;
+    }
+</style>
 <div>
     <section>
         <h1>
@@ -15,15 +19,17 @@
         </h1>
         <div>
             <div class="row row-cols-1 row-cols-md-5 g-4">
-                @foreach (Bezit boek in @Model.Bezit)
+                @foreach (DetailBezit boek in @Model.Bezit)
                 {
                     <div class="col">
                         <div class="card h-100" style="width: 13rem;">
-                            <img class="card-img-top" src="@boek.AfbeeldingsPad" alt="Card image cap">
+                            <img class="card-img-top" src="@boek.afbeeldingsPad" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">@boek.Staat</h5>
-                                <p class="card-text">@boek.Waardering</p>
-                                <a asp-page="/Comic" asp-route-uitgaveid="@boek.UitgaveId" class="stretched-link"></a>
+                                <h5 class="card-title">@boek.titel</h5>
+                                <p class="card-text">@boek.staat</p>
+                                <a asp-page="/Comic" asp-route-uitgaveid="@boek.uitgaveId" class="stretched-link z-10"></a>
+                                <a asp-page-handler="RemoveFromCollection" asp-route-bezitId="@boek.bezitId" class="delete">Verwijderen</a>
+                                
                             </div>
                         </div>
                     </div>

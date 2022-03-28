@@ -32,7 +32,7 @@ public class Comic : PageModel
             return new UitgaveRepository().GetThree(UitgaveId, Uitgave.ReeksId);
         }
     }
-
+    
     public IEnumerable<Auteur> Auteurs
     {
         get
@@ -49,9 +49,5 @@ public class Comic : PageModel
     {
         new BezitRepository().AddToCollection(userManager.GetUserId(User), UitgaveId, Uitgave.AfbeeldingsPad);
         return RedirectToPage("MyCollection");
-    }
-    public async Task<IActionResult> OnPostLogoutAsync()
-    {
-        return RedirectToPage("Login");
     }
 }
