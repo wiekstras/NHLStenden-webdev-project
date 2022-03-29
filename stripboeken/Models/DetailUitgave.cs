@@ -6,7 +6,7 @@
         public int ReeksId { get; set; }
         public string ReeksTitel { get; set; }
         public string BoekTitel { get; set; }
-        public int boekId { get; set; }
+        public int BoekId { get; set; }
         public string Weblink { get; set; }
         public string ISBN { get; set; }
         public int Jaar { get; set; }

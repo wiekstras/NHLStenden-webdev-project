@@ -42,10 +42,13 @@
                     @{
                         if (SignInManager.IsSignedIn(User))
                         {
-                            <form method="POST">
-                                <button asp-route-uitgaveid="@Model.UitgaveId" asp-page-handler="AddToCollection" class="btn btn-secondary btn-lg">Voeg toe aan collectie</button>
-                            </form>
-                            <a asp-page="EditComic" asp-route-uitgaveid="@Model.UitgaveId" class="delete">Verwijderen</a>
+                            
+                              <form method="POST">
+                        
+                                  <button asp-route-uitgaveid="@Model.UitgaveId" asp-page-handler="AddToCollection" class="btn btn-secondary btn-lg">Voeg toe aan collectie</button>
+                              </form>
+                              <a asp-page="EditComic" asp-route-uitgaveid="@Model.UitgaveId" class="mt-2 btn btn-secondary btn-lg">Wijzig deze uitgave</a>
+                            
 
                         }
                         else

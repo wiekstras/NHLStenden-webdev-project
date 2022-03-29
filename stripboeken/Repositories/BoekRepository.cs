@@ -29,7 +29,7 @@ public class BoekRepository
                 where ReeksId = @ReeksId";
 
         using var connection = GetConnection();
-        var boeken = connection.Query<Boek>(sql, new {reeksid});
+        var boeken = connection.Query<Boek>(sql, new { reeksid });
         return boeken;
     }
 
@@ -43,6 +43,20 @@ public class BoekRepository
         using var connection = GetConnection();
         var addedBoek = connection.QuerySingle<Boek>(sql, boek);
         return addedBoek;
+    }
+
+    public Boek Update(Boek boek)
+    {
+        string sql = @"
+                UPDATE Boek SET 
+                    titel = @Titel,
+                    weblink = @Weblink
+                WHERE boekId = @BoekId;
+                SELECT * FROM Boek WHERE BoekId = @BoekId";
+
+        using var connection = GetConnection();
+        var updatedBoek = connection.QuerySingle<Boek>(sql, boek);
+        return updatedBoek;
     }
 
 }
