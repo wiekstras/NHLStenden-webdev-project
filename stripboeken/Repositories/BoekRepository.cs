@@ -36,8 +36,8 @@ public class BoekRepository
     public Boek Add(Boek boek)
     {
         string sql = @"
-                INSERT INTO Boek (titel, reeksId) 
-                VALUES (@Titel, @ReeksId); 
+                INSERT INTO Boek (titel, weblink, reeksId, is18Plus) 
+                VALUES (@Titel, @Weblink, @ReeksId, @is18Plus); 
                 SELECT * FROM Boek WHERE BoekId = LAST_INSERT_ID()";
 
         using var connection = GetConnection();

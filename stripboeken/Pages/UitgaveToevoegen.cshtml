@@ -46,6 +46,17 @@
                         <input asp-for="Boek.Titel" class="form-control">
                         <span class="text-danger" asp-validation-for="Boek.Titel"></span>
                     </div>
+                    <div class="form-group" id="nieuweBoekWeblink" style="display:none">
+                        <label asp-for="Boek.WebLink">Stripboek weblink:</label>
+                        <input asp-for="Boek.WebLink" class="form-control">
+                        <span class="text-danger" asp-validation-for="Boek.WebLink"></span>
+                    </div>
+                    <div class="form-group" id="nieuweBoek18plus" style="display:none">
+                        <input asp-for="Boek.Is18Plus" class="form-check-label">
+                        <label asp-for="Boek.Is18Plus" class="form-check-label">Bevat het boek 18+ inhoud?</label>
+                        <span class="text-danger" asp-validation-for="Boek.Is18Plus"></span>  
+                        <br>
+                    </div>                  
                     <div class="form-group" id="bestaandeBoekTitel">
                         <label asp-for="Boek.BoekId">Stripboek titel:</label>
                         <select class="form-select"
@@ -83,6 +94,11 @@
                         <input asp-for="NewAuteur.Achternaam" class="form-control">
                         <span class="text-danger" asp-validation-for="NewAuteur.Achternaam"></span>
                     </div>
+                    <div class="form-group" id="nieuweAuteurWeblink" style="display:none">
+                        <label asp-for="NewAuteur.Weblink">Auteur weblink:</label>
+                        <input asp-for="NewAuteur.Weblink" class="form-control">
+                        <span class="text-danger" asp-validation-for="NewAuteur.Weblink"></span>
+                    </div>
                     <div class="form-group" id="bestaandeAuteur">
                         <label asp-for="Auteur">Auteur:</label>
                         <select class="form-select"
@@ -106,6 +122,11 @@
                         <label asp-for="NewIllustrator.Achternaam">Illustrator achternaam:</label>
                         <input asp-for="NewIllustrator.Achternaam" class="form-control">
                         <span class="text-danger" asp-validation-for="NewIllustrator.Achternaam"></span>
+                    </div>
+                    <div class="form-group" id="nieuweIllustratorWeblink" style="display:none">
+                        <label asp-for="NewIllustrator.Weblink">Illustrator weblink:</label>
+                        <input asp-for="NewIllustrator.Weblink" class="form-control">
+                        <span class="text-danger" asp-validation-for="NewIllustrator.Weblink"></span>
                     </div>
                     <div class="form-group" id="bestaandeIllustrator">
                         <label asp-for="Illustrator">Illustrator:</label>

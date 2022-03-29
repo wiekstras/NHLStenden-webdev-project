@@ -59,7 +59,7 @@ public class AuteurRepository
     public Auteur AddAuteur(Auteur auteur)
     {
         string sql = @"
-                INSERT INTO Boek (auteurId, voornaam, achternaam, weblink) 
+                INSERT INTO Auteur (auteurId, voornaam, achternaam, weblink) 
                 VALUES (@auteurId, @voornaam, @achternaam, @weblink); 
                 SELECT * FROM Auteur WHERE AuteurId = LAST_INSERT_ID()";
 

@@ -108,40 +108,7 @@ namespace stripboeken.Pages
 
             Uitgave = new UitgaveRepository().Add(Uitgave);
 
-            if (NewAuteur.Voornaam == NewIllustrator.Voornaam)
-            {
-                NewAuteur = new AuteurRepository().AddAuteur(NewAuteur);
-
-                Auteur.AuteurId = NewIllustrator.AuteurId;
-                Auteur.UitgaveId = Uitgave.UitgaveId;
-                Auteur.Functie = "Beide";
-            }
-
-            else
-            {
-                if (NewAuteur.Voornaam != null)
-                {
-                    NewAuteur = new AuteurRepository().AddAuteur(NewAuteur);
-
-                    Auteur.AuteurId = NewIllustrator.AuteurId;
-                    Auteur.UitgaveId = Uitgave.UitgaveId;
-                    Auteur.Functie = "Auteur";
-                }
-
-                if (NewIllustrator.Voornaam != null)
-                {
-                    NewIllustrator = new AuteurRepository().AddAuteur(NewIllustrator);
-
-                    Illustrator.AuteurId = NewIllustrator.AuteurId;
-                    Illustrator.UitgaveId = Uitgave.UitgaveId;
-                    Illustrator.Functie = "Illustrator";
-
-                    new AuteurRepository().Add(Illustrator);
-
-                }
-            }
-
-            if (Auteur.AuteurId == Illustrator.AuteurId)
+            if (Auteur.AuteurId == Illustrator.AuteurId && Auteur.AuteurId != 0)
             {
                 Auteur.UitgaveId = Uitgave.UitgaveId;
                 Auteur.Functie = "Beide";
@@ -163,6 +130,43 @@ namespace stripboeken.Pages
                     new AuteurRepository().Add(Illustrator);
                 }
             }
+
+            if (NewAuteur.Voornaam == NewIllustrator.Voornaam && NewAuteur.Voornaam != null)
+            {
+                NewAuteur = new AuteurRepository().AddAuteur(NewAuteur);
+
+                Auteur.AuteurId = NewAuteur.AuteurId;
+                Auteur.UitgaveId = Uitgave.UitgaveId;
+                Auteur.Functie = "Beide";
+
+                new AuteurRepository().Add(Auteur);
+            }
+
+            else
+            {
+                if (NewAuteur.Voornaam != null)
+                {
+                    NewAuteur = new AuteurRepository().AddAuteur(NewAuteur);
+
+                    Auteur.AuteurId = NewAuteur.AuteurId;
+                    Auteur.UitgaveId = Uitgave.UitgaveId;
+                    Auteur.Functie = "Auteur";
+
+                    new AuteurRepository().Add(Auteur);
+                }
+
+                if (NewIllustrator.Voornaam != null)
+                {
+                    NewIllustrator = new AuteurRepository().AddAuteur(NewIllustrator);
+
+                    Illustrator.AuteurId = NewIllustrator.AuteurId;
+                    Illustrator.UitgaveId = Uitgave.UitgaveId;
+                    Illustrator.Functie = "Illustrator";
+
+                    new AuteurRepository().Add(Illustrator);
+                }
+            }
+
             return Redirect("/UitgaveToevoegen");
         }
     }

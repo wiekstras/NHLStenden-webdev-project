@@ -16,7 +16,7 @@ public class UitgaveRepository
         string sql = @"select u.*, b.boekId As Id, b.*
                 from uitgave u
                 inner join boek b on u.boekId = b.boekId
-                order by b.reeksId";
+                order by b.reeksId asc, b.titel asc";
 
         using var connection = GetConnection();
 

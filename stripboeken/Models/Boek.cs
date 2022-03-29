@@ -11,7 +11,7 @@ public class Boek
     
     public string WebLink { get; set; }
     
-    public int Is18Plus { get; set; }
+    public bool Is18Plus { get; set; }
     
     public int ReeksId { get; set; }
 
