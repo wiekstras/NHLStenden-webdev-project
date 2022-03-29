@@ -14,16 +14,29 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public IEnumerable<Uitgave> Uitgaves
-    {
-        //De lijst van producten wordt via een query opgehaald als deze onder de juiste category vallen.
-        get
-        {
-            return new UitgaveRepository().Get();
-        }
-    }
+    [BindProperty]
+    public Filter Filter { get; set; }
+
+    public IEnumerable<DetailUitgave> Uitgaves { get; set; }
 
     public void OnGet()
     {
+        Uitgaves = new UitgaveRepository().Get();
+    }
+
+    public void OnPost()
+    {
+        if(Filter.Name == "reeks")
+        {
+            Uitgaves = new UitgaveRepository().SearchReeks(Filter);
+        }
+        else if(Filter.Name == "boek")
+        {
+            Uitgaves = new UitgaveRepository().SearchBoek(Filter);
+        }
+        else
+        {
+            Uitgaves = new UitgaveRepository().SearchISBN(Filter);
+        }
     }
 }

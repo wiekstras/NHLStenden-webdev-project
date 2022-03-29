@@ -15,7 +15,7 @@ public class Bezit
     
     public string AfbeeldingsPad { get; set; }
     
-    public int GebruikerId { get; set; }
+    public string Id { get; set; }
     
     public int UitgaveId { get; set; }
     

@@ -1,6 +1,11 @@
 @page
 @using stripboeken.Models
+@using Microsoft.AspNetCore.Identity
 @model stripboeken.Pages.Comic
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 <div class="container">
     <div class="row mt-2">
         <h1>@Model.Uitgave.BoekTitel</h1>
@@ -15,11 +20,15 @@
             </div>
             <div class="col">
                 <div>
-                    <p>
-                        <b>Beschrijving:</b> <br />
+                    @if (@Model.Uitgave.Beschrijving != null)
+                    {
+                        <p>
+                            <b>Beschrijving:</b> <br />
 
-                        @Model.Uitgave.Beschrijving
-                    </p>
+                            @Model.Uitgave.Beschrijving
+                        </p>
+                    }
+
                     @if (@Model.Uitgave.Weetjes != null)
                     {
                         <p>
@@ -30,7 +39,25 @@
                     }
                 </div>
                 <div class="align-content-center">
-                    <button type="button" class="btn btn-secondary btn-lg">Voeg toe aan collectie</button>
+                    @{
+                        if (SignInManager.IsSignedIn(User))
+                        {
+                            
+                              <form method="POST">
+                        
+                                  <button asp-route-uitgaveid="@Model.UitgaveId" asp-page-handler="AddToCollection" class="btn btn-secondary btn-lg">Voeg toe aan collectie</button>
+                              </form>
+                              <a asp-page="EditComic" asp-route-uitgaveid="@Model.UitgaveId" class="mt-2 btn btn-secondary btn-lg">Wijzig deze uitgave</a>
+                            
+
+                        }
+                        else
+                        {
+                            <p class="text-danger">Maak eerst een account om dit stripboek toe te voegen aan je collectie</p>
+
+                        }
+                    }
+
                 </div>
             </div>
         </div>
@@ -42,9 +69,11 @@
                     </h2>
                     <pre>
 
-    Auteur: @foreach (Auteur schrijver in @Model.Auteurs) { @if (@schrijver.Functie != "Illustrator") {<a href="@schrijver.Weblink">@schrijver.Voornaam @schrijver.Achternaam</a>}}
+    Auteur: @foreach (DetailAuteur schrijver in @Model.Auteurs)
+    { @if (@schrijver.Functie != "Illustrator") {<a href="@schrijver.Weblink">@schrijver.Voornaam @schrijver.Achternaam</a>}}
 
-    Illustrator: @foreach (Auteur illustrator in @Model.Auteurs) { @if (@illustrator.Functie != "Schrijver") {<a href="@illustrator.Weblink">@illustrator.Voornaam @illustrator.Achternaam</a>}}
+    Illustrator: @foreach (DetailAuteur illustrator in @Model.Auteurs)
+    { @if (@illustrator.Functie != "Auteur") {<a href="@illustrator.Weblink">@illustrator.Voornaam @illustrator.Achternaam</a>}}
 
     ISBN: @Model.Uitgave.ISBN
     Jaar: @Model.Uitgave.Jaar
@@ -57,24 +86,27 @@
                     </pre>
                 </div>
             </div>
-            <div class="col">
-                <div class="row">
-                    <h5>
-                        <b> Meer van deze reeks: </b>
-                    </h5>
-                    @foreach (Uitgave uitgave in @Model.Uitgaves)
-                    {
-                        <div class="card mb-2" style="width: 9rem;">
-                            <img class="card-img-top" src="@uitgave.AfbeeldingsPad" alt="Card image cap">
-                            <div class="card-body">
-                                <h10 class="card-title">@uitgave.Boek.Titel</h10>
-                                <p class="card-text"><b>@uitgave.Jaar</b></p>
-                                <a asp-page="/Comic" asp-route-uitgaveid="@uitgave.UitgaveId" class="stretched-link"></a>
+            @if (@Model.Uitgaves.Any())
+            {
+                <div class="col">
+                    <div class="row">
+                        <h5>
+                            <b> Meer van deze reeks: </b>
+                        </h5>
+                        @foreach (Uitgave uitgave in @Model.Uitgaves)
+                        {
+                            <div class="card mb-2" style="width: 9rem;">
+                                <img class="card-img-top" src="@uitgave.AfbeeldingsPad" alt="Card image cap">
+                                <div class="card-body">
+                                    <h10 class="card-title">@uitgave.Boek.Titel</h10>
+                                    <p class="card-text"><b>@uitgave.Jaar</b></p>
+                                    <a asp-page="/Comic" asp-route-uitgaveid="@uitgave.UitgaveId" class="stretched-link"></a>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>

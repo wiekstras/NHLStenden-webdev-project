@@ -1,0 +1,62 @@
+﻿<script>
+    function nieuweReeks()
+    {
+        if($('#nieuweReeksInvoer').is(":checked")) {
+            $("#nieuweReeksTitel").show();
+            $("#bestaandeReeksTitel").hide();
+        }
+        else {
+            $("#nieuweReeksTitel").hide();
+            $("#bestaandeReeksTitel").show();
+        }
+    }
+
+    function nieuwBoek()
+    {
+        if($('#nieuwBoekInvoer').is(":checked")) {
+            $("#nieuweBoekTitel").show();
+            $("#nieuweBoekWeblink").show();
+            $("#nieuweBoek18plus").show();
+            $("#bestaandeBoekTitel").hide();
+        }
+        else {
+            $("#nieuweBoekTitel").hide();
+            $("#nieuweBoekWeblink").hide();
+            $("#nieuweBoek18plus").hide();
+            $("#bestaandeBoekTitel").show();
+        }
+    }
+
+        function nieuweAuteur()
+    {
+        if($('#nieuweAuteurInvoer').is(":checked")) {
+            $("#nieuweAuteurVoornaam").show();
+            $("#nieuweAuteurAchternaam").show();
+            $("#nieuweAuteurWeblink").show();
+            $("#bestaandeAuteur").hide();
+        }
+        else {
+            $("#nieuweAuteurVoornaam").hide();
+            $("#nieuweAuteurAchternaam").hide();
+            $("#nieuweAuteurWeblink").hide();
+            $("#bestaandeAuteur").show();
+        }
+    }
+
+        function nieuweIllustrator()
+    {
+        if($('#nieuweIllustratorInvoer').is(":checked")) {
+            $("#nieuweIllustratorVoornaam").show();
+            $("#nieuweIllustratorAchternaam").show();
+            $("#nieuweIllustratorWeblink").show();
+            $("#bestaandeIllustrator").hide();
+        }
+        else {
+            $("#nieuweIllustratorVoornaam").hide();
+            $("#nieuweIllustratorAchternaam").hide();
+            $("#nieuweIllustratorWeblink").hide();
+            $("#bestaandeIllustrator").show();
+        }
+    }
+
+</script>

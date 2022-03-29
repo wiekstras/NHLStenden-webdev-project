@@ -1,173 +1,47 @@
 @page
-@model PrivacyModel
-@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Identity
+@using stripboeken.Models
+@model stripboeken.Pages.MyCollection
 @inject SignInManager<IdentityUser> SignInManager
+<<<<<<< HEAD
 @{
     ViewData["Title"] = "Mijn collectie";
 }
 
+=======
+@inject UserManager<IdentityUser> UserManager
+
+
+<style>
+    .card .delete {
+       z-index: 2;
+       position: relative;
+    }
+</style>
+>>>>>>> 1bacf5ee0d69010099fbd5a6507a5b49e5fe43e8
 <div>
-        <section>
-            <h1>
-                Welkom @User.Identity.Name , Bij je collectie
-                
-                </h1>
-                <div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="card d image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
+    <section>
+        <h1>
+            Welkom @User.Identity.Name , Bij je collectie
+        </h1>
+        <div>
+            <div class="row row-cols-1 row-cols-md-5 g-4">
+                @foreach (DetailBezit boek in @Model.Bezit)
+                {
+                    <div class="col">
+                        <div class="card h-100" style="width: 13rem;">
+                            <img class="card-img-top" src="@boek.afbeeldingsPad" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@boek.titel</h5>
+                                <p class="card-text">@boek.staat</p>
+                                <a asp-page="/Comic" asp-route-uitgaveid="@boek.uitgaveId" class="stretched-link z-10"></a>
+                                <a asp-page-handler="RemoveFromCollection" asp-route-bezitId="@boek.bezitId" class="delete">Verwijderen</a>
+                                
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-2" style="width: 13rem;">
-                                <img class="card-img-top" src="~/assets/stripboek.jpeg" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Suske en wiske</p>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
-                </div>
-        </section>
+                }
+            </div>
+        </div>
+    </section>
 </div>
