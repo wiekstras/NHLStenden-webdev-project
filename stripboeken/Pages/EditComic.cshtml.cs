@@ -10,6 +10,7 @@ public class EditComic : PageModel
     [BindProperty(SupportsGet = true)]
     public int UitgaveId { get; set; }
 
+    //Haalt de bestaande gegevens op van de uitgave.
     public DetailUitgave Uitgave
     {
         get

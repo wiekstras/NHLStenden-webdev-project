@@ -11,6 +11,7 @@ public class ReeksRepository
         return new DbUtils().GetDbConnection();
     }
 
+    //Selecteert de reeks van het bijbehorende reeksId.
     public Reeks GetSingle(int reeksId)
     {
         string sql = @"select *
@@ -22,6 +23,7 @@ public class ReeksRepository
         return reeks;
     }
 
+    //Selecteert alle reeksen uit de database.
     public IEnumerable<Reeks> Get()
     {
         string sql = @"select *
@@ -32,6 +34,7 @@ public class ReeksRepository
         return reeks;
     }
 
+    //Voegt een nieuwe reeks toe.
     public Reeks Add(string titel)
     {
         string sql = @"

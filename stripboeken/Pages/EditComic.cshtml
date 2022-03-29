@@ -16,6 +16,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-4">
                     <h1 class="mb-3">Bewerk Comic</h1>
                     <form method="POST">
+                        @*Hidden inputs worden gebruikt voor de ModelBining*@
                         <input type="hidden" asp-for="EditUitgave.UitgaveId" value="@Model.Uitgave.UitgaveId" />
                         <input type="hidden" asp-for="EditBoek.BoekId" value="@Model.Uitgave.BoekId" />
                         <input type="hidden" asp-for="EditBoek.ReeksId" value="@Model.Uitgave.ReeksId" />

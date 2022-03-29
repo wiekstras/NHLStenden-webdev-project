@@ -11,24 +11,72 @@ public class UitgaveRepository
         return new DbUtils().GetDbConnection();
     }
 
-    public IEnumerable<Uitgave> Get()
+    //Ophalen van alle uitgaven in de database.
+    public IEnumerable<DetailUitgave> Get()
     {
-        string sql = @"select u.*, b.boekId As Id, b.*
-                from uitgave u
-                inner join boek b on u.boekId = b.boekId
-                order by b.reeksId asc, b.titel asc";
+        string sql = @"select *
+                from detailuitgave";
 
         using var connection = GetConnection();
 
-        var uitgaves = connection.Query<Uitgave, Boek, Uitgave>(sql, (uitgave, boek) =>
-        {
-            uitgave.Boek = boek;
-            return uitgave;
-        });
-        return uitgaves;
-
+        var uitgave = connection.Query<DetailUitgave>(sql);
+        return uitgave;
     }
 
+    //Ophalen van een enkele uitgave met het opgegeven Id uit de database.
+    public DetailUitgave Get(int uitgaveId)
+    {
+        string sql = @"select *
+                from detailuitgave
+                where uitgaveId = @uitgaveId";
+
+        using var connection = GetConnection();
+
+        var uitgave = connection.QuerySingle<DetailUitgave>(sql, new { uitgaveId });
+        return uitgave;
+    }
+
+    //Ophalen van alle uitgaven die overeenkomen met de zoekterm van de reekstitel.
+    public IEnumerable<DetailUitgave> SearchReeks(Filter filter)
+    {
+        string sql = @"select *
+                from detailuitgave
+                where reeksTitel LIKE CONCAT('%',@Value,'%')";
+
+        using var connection = GetConnection();
+
+        var uitgave = connection.Query<DetailUitgave>(sql, filter);
+        return uitgave;
+    }
+
+    //Ophalen van alle uitgaven die overeenkomen met de zoekterm van de boektitel.
+    public IEnumerable<DetailUitgave> SearchBoek(Filter filter)
+    {
+        string sql = @"select *
+                from detailuitgave
+                where boekTitel LIKE CONCAT('%',@Value,'%')";
+
+        using var connection = GetConnection();
+
+        var uitgave = connection.Query<DetailUitgave>(sql, filter);
+        return uitgave;
+    }
+
+    //Ophalen van alle uitgaven die overeenkomen met de zoekterm van het ISBN nummer.
+    public IEnumerable<DetailUitgave> SearchISBN(Filter filter)
+    {
+        string sql = @"select *
+                from detailuitgave
+                where ISBN LIKE CONCAT('%',@Value,'%')";
+
+        using var connection = GetConnection();
+
+        var uitgave = connection.Query<DetailUitgave>(sql, filter);
+        return uitgave;
+    }
+
+    //Ophalen van 3 uitgaven die in dezelfde reeks zitten als de getoonde uitgave.
+    //to do: vervangen met de detailuitgave view
     public IEnumerable<Uitgave> GetThree(int uitgaveId, int reeksId)
     {
         string sql = @"select u.*, b.boekId As Id, b.*
@@ -47,29 +95,8 @@ public class UitgaveRepository
         return uitgaves;
 
     }
-    public Uitgave GetOne(int uitgaveId)
-    {
-        string sql = @"select *
-                from uitgave
-                where uitgaveId = @uitgaveId";
 
-        using var connection = GetConnection();
-        var uitgave = connection.QuerySingle<Uitgave>(sql, new {uitgaveId});
-        return uitgave;
-    }
-
-
-    public DetailUitgave Get(int uitgaveId)
-    {
-        string sql = @"select *
-                from detailuitgave
-                where uitgaveId = @uitgaveId";
-
-        using var connection = GetConnection();
-        
-        var uitgave = connection.QuerySingle<DetailUitgave>(sql, new {uitgaveId});
-        return uitgave;
-    }
+    //Updaten van de uitgave
     public Uitgave Update(Uitgave uitgave)
     {
         string sql =@"UPDATE detailuitgave 
@@ -96,6 +123,8 @@ public class UitgaveRepository
         var updatedUitgave = connection.QuerySingle<Uitgave>(sql,  uitgave);
         return updatedUitgave;
     }
+
+    //Toevoegen van een nieuwe uitgave
     public Uitgave Add(Uitgave uitgave)
     {
         string sql = @"
@@ -133,5 +162,24 @@ public class UitgaveRepository
         var addedUitgave = connection.QuerySingle<Uitgave>(sql, uitgave);
         return addedUitgave;
     }
+
+    //Verouderd door gebruik van de view detailuitgave. Geen joins meer nodig.
+    //public IEnumerable<Uitgave> Get()
+    //{
+    //    string sql = @"select u.*, b.boekId As Id, b.*
+    //            from uitgave u
+    //            inner join boek b on u.boekId = b.boekId
+    //            order by b.reeksId asc, b.titel asc";
+
+    //    using var connection = GetConnection();
+
+    //    var uitgaves = connection.Query<Uitgave, Boek, Uitgave>(sql, (uitgave, boek) =>
+    //    {
+    //        uitgave.Boek = boek;
+    //        return uitgave;
+    //    });
+    //    return uitgaves;
+
+    //}
 
 }

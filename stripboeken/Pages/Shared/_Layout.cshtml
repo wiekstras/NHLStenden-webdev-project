@@ -31,11 +31,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/MyCollection">Mijn collectie</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/UitgaveToevoegen">Uitgave toevoegen</a>
+                                </li>
                             </ul>
                             <ul class="navbar-nav d-flex justify-content-end">
                                 <li class="nav-item">
-                                                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogOut">Log uit</a>
-                                                                </li>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogOut">Log uit</a>
+                                </li>
                             </ul>
                         }
                         else
@@ -50,36 +53,12 @@
                             </ul>
                         }
                     }
-                    
-                   
+
+
                 </div>
             </div>
         </nav>
     </header>
-
-    <!--
-    <div class="sidenav">
-        <div class="form-group">
-            <label for="sorting">Sorteren op...</label>
-            <select class="form-control" id="sorting">
-                <option value="ISBN">ISBN</option>
-                <option value="title">Titel</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="search">Zoeken op...</label>
-            <select class="form-control" id="search">
-                <option value="ISBN">ISBN</option>
-                <option value="title">Titel</option>
-            </select>
-        </div>
-        <div>
-            <button type="button" class="btn btn-secondary btn-lg">Sorteer/zoek</button>
-
-        </div>
-    </div>
-    -->
-
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -89,7 +68,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - stripboeken - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2022 - ComicStore
         </div>
     </footer>
 

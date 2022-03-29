@@ -11,6 +11,7 @@ public class BoekRepository
         return new DbUtils().GetDbConnection();
     }
 
+    //Selecteert een enkele stripboek uit de database met het meegegeven boekId.
     public Boek GetSingle(int boekId)
     {
         string sql = @"select *
@@ -22,6 +23,7 @@ public class BoekRepository
         return boek;
     }
 
+    //Selecteert alle boeken die onderdeel zijn van de meegegeven reeks.
     public IEnumerable<Boek> Get(int reeksid)
     {
         string sql = @"select *
@@ -33,6 +35,7 @@ public class BoekRepository
         return boeken;
     }
 
+    //Voegt een boek toe aan de database.
     public Boek Add(Boek boek)
     {
         string sql = @"
@@ -45,6 +48,7 @@ public class BoekRepository
         return addedBoek;
     }
 
+    //Past een bestaand boek aan.
     public Boek Update(Boek boek)
     {
         string sql = @"
