@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 using System.Collections.Generic;
-=======
 using Microsoft.AspNetCore.Identity;
->>>>>>> 1bacf5ee0d69010099fbd5a6507a5b49e5fe43e8
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using stripboeken.Models;
