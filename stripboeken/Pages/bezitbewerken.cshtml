@@ -1,0 +1,73 @@
+@page
+@model stripboeken.Pages.bezitbewerken
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+            <div class="container mt-5">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                        <h1 class="mb-3">Bewerk Comic</h1>
+                        <form method="POST">
+                            <input type="hidden" asp-for="EditBezit.BezitId" value="@Model.Bezit.UitgaveId" />
+                            
+
+                            <div class="mb-3">
+                                <label asp-for="EditBezit.Staat" class="form-label"></label>
+                                <input type="text" asp-for="EditBezit.Staat" value="@Model.Bezit.Staat" class="form-control"/>
+                                <span asp-validation-for="EditBezit.Staat" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="EditBezit.StaatBeschrijving" class="form-label"></label>
+                                <input type="text" asp-for="EditBezit.StaatBeschrijving" value="@Model.Bezit.StaatBeschrijving" class="form-control"/>
+                                <span asp-validation-for="EditBezit.StaatBeschrijving" class="text-danger"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <output>Waardering: 1</output>
+                                <input type="range" asp-for="EditBezit.Waardering" min="0" max="5" step="1" value="@Model.Bezit.Waardering" class="form-control" oninput="this.previousElementSibling.value = `Waardering: ${this.value} `"/>
+                                <span asp-validation-for="EditBezit.Waardering" class="text-danger"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="EditBezit.AfbeeldingsPad" class="form-label"></label>
+                                <input type="text" asp-for="EditBezit.AfbeeldingsPad" value="@Model.Bezit.AfbeeldingsPad" class="form-control"/>
+                                <span asp-validation-for="EditBezit.AfbeeldingsPad" class="text-danger"></span>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="EditBezit.InkoopPrijs" class="form-label"></label>
+                                <input type="text" asp-for="EditBezit.InkoopPrijs" value="@Model.Bezit.InkoopPrijs" class="form-control"/>
+                                <span asp-validation-for="EditBezit.InkoopPrijs" class="text-danger"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="EditBezit.VerkoopPrijs" class="form-label"></label>
+                                <input type="text" asp-for="EditBezit.VerkoopPrijs" value="@Model.Bezit.VerkoopPrijs" class="form-control"/>
+                                <span asp-validation-for="EditBezit.VerkoopPrijs" class="text-danger"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="EditBezit.IsTeKoop" class="form-label"></label>
+                                <input type="text" asp-for="EditBezit.IsTeKoop" value="@Model.Bezit.IsTeKoop" class="form-control"/>
+                                <span asp-validation-for="EditBezit.IsTeKoop" class="text-danger"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn btn-dark">Update bezit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+</div>
+</body>
+</html>

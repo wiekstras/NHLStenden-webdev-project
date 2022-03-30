@@ -29,6 +29,7 @@
                                 <p class="card-text">@boek.staat</p>
                                 <a asp-page="/Comic" asp-route-uitgaveid="@boek.uitgaveId" class="stretched-link z-10"></a>
                                 <a asp-page-handler="RemoveFromCollection" asp-route-bezitId="@boek.bezitId" class="delete">Verwijderen</a>
+                                <a asp-page="bezitbewerken" asp-route-bezitId="@boek.bezitId" class="delete">Bewerken</a>
                                 
                             </div>
                         </div>

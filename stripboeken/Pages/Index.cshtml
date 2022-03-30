@@ -30,7 +30,18 @@
     <div class="col col-10">
         <section>
             <div>
+                
                 <div class="row row-cols-1 row-cols-md-5 g-4">
+                    @{
+                        if (@Model.Uitgaves.Count() == 0)
+                        {
+                            <div class="mx-auto mt-lg-4">
+                                Er zijn geen boeken die voltooien aan uw zoek opdracht
+                            </div>
+
+                        }
+                    }
+
                     @foreach (DetailUitgave uitgave in @Model.Uitgaves)
                     {
                         <div class="col">
