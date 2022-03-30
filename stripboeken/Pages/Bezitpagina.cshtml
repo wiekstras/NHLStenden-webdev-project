@@ -1,0 +1,61 @@
+﻿@page
+@model stripboeken.Pages.Bezitpagina
+
+<div class="container">
+    <div class="row mt-2">
+        <h1>Nieuw bezit</h1>
+        
+    </div>
+    <br>
+    <div>
+        <div class="row">
+           
+            <div class="col">
+                <div>
+                    <form>
+                        <div class="form-group row">
+                            <label for="inputWaardering" class="col-sm-2 col-form-label">Waardering:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputWaardering">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputKoopprijs" class="col-sm-2 col-form-label">Koopprijs:</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="inputKoopprijs">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputStaat" class="col-sm-2 col-form-label">Staat:</label>
+                            <div class="col-sm-10">
+                                <select class="custom-select my-1 mr-sm-2" id="inputStaat">
+                                <option selected>Kies een staat...</option>
+                                <option value="1">Nieuw</option>
+                                <option value="2">Zo goed als nieuw</option>
+                                <option value="3">Gebruikt</option>
+                                <option value="4">Slecht</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputBeschrijvingStaat" class="col-sm-2 col-form-label">Beschrijving van staat:</label>
+                            <textarea class="form-control" id="inputBeschrijvingStaat" rows="2"></textarea>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputAfbeelding" class="col-sm-2 col-form-label">Afbeelding uploaden:</label>
+                            <input type="file" class=" form-control-file" id="inputAfbeelding">
+                        </div>
+                        <br>
+                       
+                 
+                    </form>
+                    <div class="container">
+                        <button type="button" class="btn btn-secondary btn-lg">Annuleren</button>
+                        <button type="button" class="btn btn-secondary btn-lg">Opslaan</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
