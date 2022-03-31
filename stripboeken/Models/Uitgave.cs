@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace stripboeken.Models;
 
 public class Uitgave
@@ -16,11 +18,15 @@ public class Uitgave
 
     public string Cover { get; set; }
     
+    [Display(Name = "Aantal bladzijden")]
+
     public int AantalBladzijden { get; set; }
     
     public decimal Breedte { get; set; }
     
     public decimal Hoogte { get; set; }
+    
+    [Display(Name = "Afbeeldings pad")]
 
     public string AfbeeldingsPad { get; set; }
     
